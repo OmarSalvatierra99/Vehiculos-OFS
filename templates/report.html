@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Reporte de Viajes - Sistema de Gestión{% endblock %}
+
+{% block header_title %}Historial de Viajes 📊{% endblock %}
+
+{% block content %}
+    <a href="{{ url_for('dashboard') }}" class="btn-back">← Volver al Panel</a>
+    <div class="card report-container">
+        <h2>Historial de Viajes de Vehículos</h2>
+        {% if report_data %}
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Fecha de Salida</th>
+                        <th>Fecha de Regreso</th>
+                        <th>Odómetro Inicio (km)</th>
+                        <th>Odómetro Fin (km)</th>
+                        <th>Km Recorridos</th>
+                        <th>Resguardante</th>
+                        <th>Placa</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Responsable</th>
+                        <th>No. de Auditores</th>
+                        <th>Nombres de Auditores</th>
+                        <th>Ruta-Destino</th>
+                        <th>Motivo de Salida</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in report_data %}
+                    <tr>
+                        <td>{{ item.fecha_salida }}</td>
+                        <td>{{ item.fecha_regreso }}</td>
+                        <td>{{ item.odometro_inicio }}</td>
+                        <td>{{ item.odometro_fin }}</td>
+                        <td>{{ item.km_recorridos }}</td>
+                        <td>{{ item.resguardante }}</td>
+                        <td>{{ item.placa }}</td>
+                        <td>{{ item.marca }}</td>
+                        <td>{{ item.modelo }}</td>
+                        <td>{{ item.responsable }}</td>
+                        <td>{{ item.no_auditores }}</td>
+                        <td>{{ item.nombre_auditores }}</td>
+                        <td>{{ item.ruta_destino }}</td>
+                        <td>{{ item.motivo_salida }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No hay datos de viajes para mostrar.</p>
+        {% endif %}
+    </div>
+{% endblock %}

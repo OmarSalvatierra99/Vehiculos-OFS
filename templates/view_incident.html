@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Detalle del Incidente{% endblock %}
+
+{% block header_title %}Detalle del Incidente #{{ incident.id }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('dashboard') }}" class="btn-back">← Volver al Panel</a>
+<div class="card details-container">
+    <h2>Información del Incidente</h2>
+    <div class="details-card">
+        <p><strong>Reportado por:</strong> {{ incident.user.username }}</p>
+        <p><strong>Fecha de Reporte:</strong> {{ incident.report_date.strftime('%d/%m/%Y %H:%M') }}</p>
+        <p><strong>Vehículo:</strong> {{ incident.vehicle.make }} {{ incident.vehicle.model }} ({{ incident.vehicle.license_plate }})</p>
+        <p><strong>Tipo de Incidente:</strong> {{ incident.incident_type }}</p>
+        <p><strong>Ubicación:</strong> {{ incident.location }}</p>
+        <p><strong>Descripción:</strong> {{ incident.description }}</p>
+        <p><strong>Estado:</strong> <span class="status-badge status-{{ incident.status }}">{{ incident.status.capitalize() }}</span></p>
+
+        {% if incident.status == 'pending' %}
+        <form action="{{ url_for('resolve_incident', incident_id=incident.id) }}" method="post" class="inline-form">
+            <button type="submit" class="btn btn-success">Marcar como Resuelto</button>
+        </form>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

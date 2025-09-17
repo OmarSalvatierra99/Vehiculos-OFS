@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Detalles del Vehículo{% endblock %}
+
+{% block header_title %}Detalles del Vehículo - {{ vehicle.license_plate }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('dashboard') }}" class="btn-back">← Volver al Panel</a>
+<div class="card vehicle-details-container">
+    <h2>Información del Vehículo</h2>
+    <div class="details-card">
+        <p><strong>Placa:</strong> {{ vehicle.license_plate }}</p>
+        <p><strong>Marca:</strong> {{ vehicle.make }}</p>
+        <p><strong>Modelo:</strong> {{ vehicle.model }}</p>
+        <p><strong>Odómetro Actual:</strong> {{ vehicle.current_odometer }} km</p>
+        <p><strong>Estado Actual:</strong> <span class="status-badge status-{{ vehicle.status }}">{{ vehicle.status.capitalize() }}</span></p>
+
+        <div class="details-actions">
+            {% if vehicle.status != 'maintenance' %}
+            <form action="{{ url_for('set_maintenance', vehicle_id=vehicle.id) }}" method="post" class="inline-form">
+                <button type="submit" class="btn btn-warning">Marcar para Mantenimiento</button>
+            </form>
+            {% else %}
+            <form action="{{ url_for('release_maintenance', vehicle_id=vehicle.id) }}" method="post" class="inline-form">
+                <button type="submit" class="btn btn-success">Liberar de Mantenimiento</button>
+            </form>
+            {% endif %}
+            <a href="{{ url_for('report_incident', vehicle_id=vehicle.id) }}" class="btn btn-secondary">Reportar Incidente</a>
+        </div>
+    </div>
+
+    <div class="trips-logs-container">
+        <div class="trips-section">
+            <h2>Historial de Viajes</h2>
+            {% if trips %}
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>ID Viaje</th>
+                        <th>Resguardante</th>
+                        <th>Destino</th>
+                        <th>Salida</th>
+                        <th>Regreso</th>
+                        <th>Km Recorridos</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trip in trips %}
+                    <tr>
+                        <td>{{ trip.id }}</td>
+                        <td>{{ trip.user.username }}</td>
+                        <td>{{ trip.destination }}</td>
+                        <td>{{ trip.start_time.strftime('%d/%m/%Y %H:%M:%S') }}</td>
+                        <td>{% if trip.end_time %}{{ trip.end_time.strftime('%d/%m/%Y %H:%M:%S') }}{% else %}En curso{% endif %}</td>
+                        <td>{% if trip.km_traveled %}{{ trip.km_traveled }}{% else %}N/A{% endif %}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>Este vehículo no tiene viajes registrados.</p>
+            {% endif %}
+        </div>
+
+        <div class="logs-section">
+            <h2>Registro de Eventos</h2>
+            {% if logs %}
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Fecha y Hora</th>
+                        <th>Evento</th>
+                        <th>Notas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for log in logs %}
+                    <tr>
+                        <td>{{ log.timestamp.strftime('%d/%m/%Y %H:%M:%S') }}</td>
+                        <td>{{ log.event }}</td>
+                        <td>{{ log.notes }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p>No hay eventos registrados para este vehículo.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

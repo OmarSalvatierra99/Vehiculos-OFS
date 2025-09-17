@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Sistema de Gestión de Vehículos{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo de la empresa">
+            </div>
+            <h1>{% block header_title %}Sistema de Gestión de Vehículos{% endblock %}</h1>
+            {% if current_user.is_authenticated %}
+                <div class="user-menu">
+                    <span class="user-greeting">Hola, {{ current_user.username }}</span>
+                    <a href="{{ url_for('logout') }}" class="logout-btn">
+                        <span class="logout-icon">→</span> Cerrar sesión
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+    </header>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                {% for category, message in messages %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2025 Sistema de Gestión de Vehículos OFS. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

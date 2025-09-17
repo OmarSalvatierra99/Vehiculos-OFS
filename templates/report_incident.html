@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Reportar Incidente{% endblock %}
+
+{% block header_title %}Reportar Incidente - {{ vehicle.license_plate }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('dashboard') }}" class="btn-back">← Volver al Panel</a>
+<div class="card form-container">
+    <div class="card form-box">
+        <h2>Reportar Incidente</h2>
+        <p>Por favor, llena los siguientes datos para reportar un incidente con el vehículo.</p>
+        <form method="post" action="{{ url_for('report_incident', vehicle_id=vehicle.id) }}">
+            <div class="input-group">
+                <label for="incident_type">Tipo de Incidente:</label>
+                <select name="incident_type" id="incident_type" required>
+                    <option value="">Selecciona un tipo</option>
+                    <option value="Choque">Choque</option>
+                    <option value="Falla Mecánica">Falla Mecánica</option>
+                    <option value="Daño por terceros">Daño por terceros</option>
+                    <option value="Neumático dañado">Neumático dañado</option>
+                    <option value="Otro">Otro</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="location">Ubicación del Incidente:</label>
+                <input type="text" name="location" id="location" required>
+            </div>
+            <div class="input-group">
+                <label for="description">Descripción detallada:</label>
+                <textarea name="description" id="description" rows="5" required></textarea>
+            </div>
+            <button type="submit">Enviar Reporte</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

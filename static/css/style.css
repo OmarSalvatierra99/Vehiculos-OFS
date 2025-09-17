@@ -1,0 +1,1164 @@
+/* Reset y estilos base mejorados */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #2c3e50;
+    --primary-light: #3a516e;
+    --accent-color: #3498db;
+    --accent-light: #5dade2;
+    --light-color: #ecf0f1;
+    --dark-color: #34495e;
+    --success-color: #2ecc71;
+    --error-color: #e74c3c;
+    --warning-color: #f39c12;
+    --text-color: #2c3e50;
+    --text-light: #7f8c8d;
+    --bg-light: #f9fafb;
+    --card-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    --hover-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    --transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    --border-radius: 10px;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--bg-light);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Estilos mejorados para la página de login */
+.login-body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.login-container {
+    background: white;
+    width: 100%;
+    max-width: 420px;
+    padding: 40px 35px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    text-align: center;
+    transition: var(--transition);
+    backdrop-filter: blur(10px);
+}
+
+.login-container:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.login-header {
+    margin-bottom: 30px;
+}
+
+.login-header h2 {
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.login-header p {
+    color: var(--text-light);
+    font-size: 15px;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.input-group {
+    position: relative;
+}
+
+.login-container input {
+    padding: 15px 18px;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: var(--transition);
+    background-color: #f8f9fa;
+    width: 100%;
+    color: var(--text-color);
+}
+
+.login-container input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    background-color: white;
+}
+
+.login-container input::placeholder {
+    color: #a0a7b0;
+}
+
+.login-container button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+}
+
+.login-container button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+}
+
+.login-footer {
+    margin-top: 30px;
+    text-align: center;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+/* Mensajes flash mejorados */
+.flashes {
+    list-style: none;
+    margin-bottom: 25px;
+}
+
+.flashes li {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    background-color: #fff3cd;
+    color: #856404;
+    border-left: 4px solid #ffc107;
+    display: flex;
+    align-items: center;
+}
+
+.flashes li:before {
+    content: "!";
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: #ffc107;
+    color: white;
+    border-radius: 50%;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* Header general mejorado */
+header {
+    background-color: white;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.06);
+    padding: 18px 0;
+    position: relative;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo img {
+    height: 40px; /* Tamaño del logo */
+    margin-right: 15px;
+}
+
+header h1 {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 28px;
+    margin: 0;
+    letter-spacing: -0.5px;
+    flex-grow: 1; /* Permite que el título ocupe el espacio restante */
+    text-align: center;
+}
+
+/* Contenedor principal mejorado */
+.container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 25px;
+    flex: 1;
+}
+
+/* Formularios mejorados */
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 20px 0;
+}
+
+.form-box {
+    background: white;
+    padding: 28px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    max-width: 600px;
+    transition: var(--transition);
+}
+
+.form-box:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.form-box h2, .form-box h3 {
+    margin-top: 0;
+    margin-bottom: 22px;
+    color: var(--primary-color);
+    font-weight: 600;
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 12px;
+    font-size: 20px;
+}
+
+.form-box p {
+    margin-bottom: 20px;
+    color: var(--text-light);
+}
+
+.form-box label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.form-box input,
+.form-box select,
+.form-box textarea {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: var(--transition);
+    background-color: #f8f9fa;
+}
+
+.form-box input:focus,
+.form-box select:focus,
+.form-box textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    background-color: white;
+}
+
+.form-box button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    width: 100%;
+}
+
+.form-box button:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+}
+
+/* Lista de vehículos mejorada */
+.vehicles-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+    margin-top: 35px;
+}
+
+.vehicle-card {
+    background: white;
+    padding: 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+}
+
+.vehicle-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--hover-shadow);
+}
+
+.vehicle-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.vehicle-image:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, transparent 70%, rgba(0,0,0,0.1));
+    z-index: 1;
+}
+
+.vehicle-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: var(--transition);
+}
+
+.vehicle-card:hover .vehicle-image img {
+    transform: scale(1.05);
+}
+
+.vehicle-card-content {
+    padding: 22px;
+}
+
+.vehicle-card h3 {
+    margin: 0 0 10px 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.vehicle-card p {
+    margin: 0 0 15px 0;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+/* Footer mejorado */
+footer {
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    padding: 22px 0;
+    margin-top: 50px;
+}
+
+footer p {
+    opacity: 0.85;
+    font-size: 14px;
+}
+
+/* Utilidades mejoradas */
+.text-center {
+    text-align: center;
+}
+
+.mt-20 {
+    margin-top: 20px;
+}
+
+.mb-20 {
+    margin-bottom: 20px;
+}
+
+/* Estilos específicos para el dashboard mejorados */
+.assigned-workers {
+    margin: 18px 0;
+    padding: 18px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.assigned-workers ul {
+    list-style-type: none;
+    margin: 12px 0 0;
+    padding: 0;
+}
+
+.assigned-workers li {
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.assigned-workers li:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+}
+
+.assigned-workers li:before {
+    content: "👤";
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.assigned-workers .no-workers {
+    color: var(--text-light);
+    font-style: italic;
+}
+
+.assign-form {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid #eee;
+}
+
+.no-vehicles {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 45px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+}
+
+.no-vehicles h3 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.no-vehicles p {
+    color: var(--text-light);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Estilos para el menú de usuario mejorados */
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.user-greeting {
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 15px;
+}
+
+.logout-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: var(--transition);
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.logout-btn:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(52, 152, 219, 0.3);
+}
+
+.logout-icon {
+    font-weight: bold;
+    display: inline-block;
+    transition: var(--transition);
+}
+
+.logout-btn:hover .logout-icon {
+    transform: translateX(3px);
+}
+
+/* Estilos para las solicitudes mejorados */
+.requests-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 22px;
+    margin: 25px 0;
+}
+
+.request-card {
+    background: white;
+    padding: 22px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border-left: 4px solid var(--warning-color);
+}
+
+.request-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--hover-shadow);
+}
+
+.request-card h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.request-card p {
+    margin: 8px 0;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.request-card strong {
+    color: var(--primary-color);
+}
+
+.request-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 18px;
+}
+
+/* Botones mejorados y homogeneizados */
+.btn {
+    display: inline-block;
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    transition: var(--transition);
+    text-align: center;
+    border: none;
+    cursor: pointer;
+    min-width: 120px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-color);
+}
+
+.btn-success {
+    background-color: var(--success-color);
+    color: white;
+}
+
+.btn-success:hover {
+    background-color: #27ae60;
+}
+
+.btn-danger {
+    background-color: var(--error-color);
+    color: white;
+}
+
+.btn-danger:hover {
+    background-color: #c0392b;
+}
+
+.btn-warning {
+    background-color: var(--warning-color);
+    color: white;
+}
+
+.btn-warning:hover {
+    background-color: #e67e22;
+}
+
+.btn-secondary {
+    background-color: var(--primary-light);
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: var(--primary-color);
+}
+
+.btn-sm {
+    padding: 8px 15px;
+    font-size: 13px;
+    min-width: 100px;
+}
+
+.btn-back {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 10px 18px;
+    background-color: var(--primary-light);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+.btn-back:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Estados de las solicitudes mejorados */
+.status-pending {
+    border-left-color: var(--warning-color);
+}
+
+.status-approved {
+    border-left-color: var(--success-color);
+}
+
+.status-rejected {
+    border-left-color: var(--error-color);
+}
+
+.no-requests {
+    text-align: center;
+    padding: 35px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    color: var(--text-light);
+}
+
+/* Estilos para select mejorados */
+select {
+    width: 100%;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+    border: 1px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: #f8f9fa;
+    transition: var(--transition);
+    color: var(--text-color);
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+    background-color: white;
+}
+
+/* Estilos para secciones del dashboard mejorados */
+.admin-section, .requests-section, .worker-section, .trips-section, .vehicles-section, .incident-section {
+    margin-bottom: 40px;
+    padding: 28px;
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+}
+
+.admin-section h2, .requests-section h2, .worker-section h2, .trips-section h2, .vehicles-section h2, .incident-section h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+/* Badges de estado */
+.status-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.status-pending .status-badge {
+    background-color: #ffeaa7;
+    color: #d35400;
+}
+
+.status-approved .status-badge {
+    background-color: #d1f7c4;
+    color: #27ae60;
+}
+
+.status-rejected .status-badge {
+    background-color: #ffcfcc;
+    color: #e74c3c;
+}
+
+/* Estilos responsivos mejorados */
+@media (max-width: 768px) {
+    .forms-container {
+        flex-direction: column;
+    }
+
+    .login-container {
+        padding: 28px 22px;
+    }
+
+    .vehicle-card {
+        max-width: 100%;
+    }
+
+    .user-menu {
+        position: static;
+        justify-content: flex-end;
+        margin-bottom: 15px;
+    }
+
+    header {
+        padding: 15px 0;
+        text-align: center;
+    }
+
+    .user-greeting {
+        display: none;
+    }
+
+    .requests-list {
+        grid-template-columns: 1fr;
+    }
+
+    .request-actions {
+        flex-direction: column;
+    }
+
+    .container {
+        padding: 0 18px;
+    }
+
+    .admin-section, .requests-section, .worker-section, .trips-section, .vehicles-section, .incident-section {
+        padding: 22px;
+    }
+}
+
+/* Animaciones sutiles */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.vehicle-card, .request-card, .form-box {
+    animation: fadeIn 0.4s ease-out;
+}
+
+/* Scrollbar personalizado para navegadores webkit */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Estilos de la leyenda para el formulario de solicitud */
+.legend {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #fff8e1; /* Color amarillo claro */
+    border-left: 5px solid var(--warning-color);
+    border-radius: 8px;
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+/* Estilos para la imagen del logo en el login */
+.logo-container {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.logo-container img {
+    height: 80px; /* Ajusta este valor al tamaño deseado para tu logo */
+    border-radius: 50%; /* Opcional: si quieres un logo circular */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ========================================= */
+/* Estilos Específicos del Dashboard */
+/* ========================================= */
+
+/* --- Estilos para la Sección de Viajes --- */
+.trips-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 22px;
+    margin: 25px 0;
+}
+
+.trip-card {
+    background: white;
+    padding: 22px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border-left: 4px solid var(--accent-color);
+}
+
+.trip-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--hover-shadow);
+}
+
+.trip-card h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.trip-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px;
+}
+
+.no-trips {
+    text-align: center;
+    padding: 35px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    color: var(--text-light);
+}
+
+/* --- Estilos para la Gestión de Vehículos (Admin) --- */
+.vehicles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 22px;
+    margin-top: 25px;
+}
+
+.vehicle-card-admin {
+    background: white;
+    padding: 22px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border-left: 4px solid var(--light-color);
+}
+
+.vehicle-card-admin:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--hover-shadow);
+}
+
+.vehicle-card-admin h3 {
+    margin: 0 0 8px 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.vehicle-card-admin p {
+    margin: 8px 0;
+    color: var(--text-color);
+    font-size: 14px;
+}
+
+.vehicle-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.inline-form {
+    display: inline-block;
+    flex-grow: 1;
+}
+
+/* --- Estilos de Estado de Vehículos --- */
+.status-available { border-left-color: var(--success-color); }
+.status-in_use { border-left-color: var(--accent-color); }
+.status-maintenance { border-left-color: var(--warning-color); }
+.status-unavailable { border-left-color: var(--error-color); }
+
+.status-available .status-badge { background-color: #d1f7c4; color: #27ae60; }
+.status-in_use .status-badge { background-color: #d4eaf7; color: #3498db; }
+.status-maintenance .status-badge { background-color: #fff3cd; color: #d35400; }
+.status-unavailable .status-badge { background-color: #ffcfcc; color: #e74c3c; }
+
+/* --- Estilos para Reportes de Incidentes --- */
+.incidents-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 22px;
+    margin: 25px 0;
+}
+
+.incident-card {
+    background: white;
+    padding: 22px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+    border-left: 4px solid var(--error-color);
+}
+
+.incident-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--hover-shadow);
+}
+
+.incident-card h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.incident-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 18px;
+}
+
+.no-incidents {
+    text-align: center;
+    padding: 35px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    color: var(--text-light);
+}
+
+/* --- Estilos para la Sección de Trabajador --- */
+.report-incident-action {
+    margin-top: 15px;
+    text-align: right;
+}
+
+/* ========================================= */
+/* Estilos para Tablas de Reportes */
+/* ========================================= */
+.report-container {
+    background: white;
+    padding: 28px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 40px;
+}
+
+.report-container h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+}
+
+.report-table th {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 14px 16px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.report-table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.report-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.report-table tr:last-child td {
+    border-bottom: none;
+}
+
+.no-data {
+    text-align: center;
+    padding: 35px;
+    color: var(--text-light);
+    font-style: italic;
+}
+
+/* ========================================= */
+/* Estilos para Detalles de Vehículo */
+/* ========================================= */
+.vehicle-details-container {
+    background: white;
+    padding: 28px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+}
+
+.vehicle-details-container h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.details-card {
+    background-color: #f8f9fa;
+    padding: 22px;
+    border-radius: var(--border-radius);
+    margin-bottom: 30px;
+}
+
+.details-card p {
+    margin: 12px 0;
+    font-size: 15px;
+}
+
+.details-card strong {
+    color: var(--primary-color);
+    min-width: 140px;
+    display: inline-block;
+}
+
+.details-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+.trips-logs-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+.trips-section, .logs-section {
+    background-color: #f8f9fa;
+    padding: 22px;
+    border-radius: var(--border-radius);
+}
+
+.trips-section h2, .logs-section h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 12px;
+    margin-bottom: 20px;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+/* ========================================= */
+/* Estilos para Detalles de Incidente */
+/* ========================================= */
+.details-container {
+    background: white;
+    padding: 28px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.details-container h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--light-color);
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    font-weight: 600;
+}
+
+.details-container p {
+    margin: 12px 0;
+    font-size: 15px;
+}
+
+.details-container strong {
+    color: var(--primary-color);
+    min-width: 140px;
+    display: inline-block;
+}
+
+/* Responsive para tablas */
+@media (max-width: 1024px) {
+    .report-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .requests-list, .trips-list, .vehicles-grid, .incidents-list {
+        grid-template-columns: 1fr;
+    }
+
+    .details-actions {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+
+    .vehicle-actions {
+        flex-direction: column;
+    }
+}

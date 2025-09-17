@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Reportes de Incidentes{% endblock %}
+
+{% block header_title %}Historial de Incidentes 🚨{% endblock %}
+
+{% block content %}
+    <a href="{{ url_for('dashboard') }}" class="btn-back">← Volver al Panel</a>
+    <div class="card report-container">
+        <h2>Todos los Reportes de Incidentes</h2>
+        {% if incidents %}
+            <table class="report-table">
+                <thead>
+                    <tr>
+                        <th>Fecha de Reporte</th>
+                        <th>Vehículo</th>
+                        <th>Placa</th>
+                        <th>Tipo de Incidente</th>
+                        <th>Reportado por</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for incident in incidents %}
+                    <tr class="status-{{ incident.status }}">
+                        <td>{{ incident.report_date.strftime('%d/%m/%Y %H:%M') }}</td>
+                        <td>{{ incident.vehicle.make }} {{ incident.vehicle.model }}</td>
+                        <td>{{ incident.vehicle.license_plate }}</td>
+                        <td>{{ incident.incident_type }}</td>
+                        <td>{{ incident.user.username }}</td>
+                        <td><span class="status-badge status-{{ incident.status }}">{{ incident.status.capitalize() }}</span></td>
+                        <td>
+                            <a href="{{ url_for('view_incident', incident_id=incident.id) }}" class="btn btn-primary btn-sm">Ver Detalles</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p class="no-data">No hay reportes de incidentes para mostrar.</p>
+        {% endif %}
+    </div>
+{% endblock %}

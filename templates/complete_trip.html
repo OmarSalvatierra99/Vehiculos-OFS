@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}Finalizar Viaje{% endblock %}
+
+{% block header_title %}Finalizar Viaje - {{ trip.vehicle.license_plate }}{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('dashboard') }}" class="btn-back">← Volver al Panel</a>
+<div class="card form-box">
+    <h2>Confirmar Fin de Viaje</h2>
+    <p><strong>Vehículo:</strong> {{ trip.vehicle.make }} {{ trip.vehicle.model }} ({{ trip.vehicle.license_plate }})</p>
+    <p><strong>Odómetro al inicio:</strong> {{ trip.start_odometer }} km</p>
+    <p>Por favor, ingresa la lectura actual del odómetro para finalizar el viaje y registrar los kilómetros recorridos.</p>
+    <form method="post" action="{{ url_for('complete_trip', trip_id=trip.id) }}">
+        <div class="input-group">
+            <label for="end_odometer">Odómetro Actual (km):</label>
+            <input type="number" name="end_odometer" id="end_odometer" required min="{{ trip.start_odometer }}">
+        </div>
+        <button type="submit">Finalizar Viaje</button>
+    </form>
+</div>
+{% endblock %}

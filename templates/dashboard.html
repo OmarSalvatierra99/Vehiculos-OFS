@@ -1,0 +1,168 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Sistema de Gestión{% endblock %}
+
+{% block header_title %}Panel de Control - Inventario de Vehículos 🚗{% endblock %}
+
+{% block content %}
+    {% if current_user.role == 'admin' %}
+    <div class="card admin-section">
+        <h2>Panel de Administración</h2>
+        <div class="forms-container">
+            <div class="card form-box">
+                <h3>Añadir Vehículo</h3>
+                <form action="{{ url_for('add_vehicle') }}" method="post">
+                    <input type="text" name="license_plate" placeholder="Placa" required>
+                    <input type="text" name="make" placeholder="Marca" required>
+                    <input type="text" name="model" placeholder="Modelo" required>
+                    <input type="number" name="current_odometer" placeholder="Odómetro Inicial (km)" required>
+                    <button type="submit">Añadir Vehículo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="card requests-section">
+        <h2>Solicitudes Pendientes</h2>
+        {% if requests %}
+            <div class="requests-list">
+                {% for req in requests %}
+                <div class="card request-card status-{{ req.status }}">
+                    <h3>Solicitud de {{ req.user.username }}</h3>
+                    <p><strong>Vehículo:</strong> {{ req.vehicle.make }} {{ req.vehicle.model }} ({{ req.vehicle.license_plate }})</p>
+                    <p><strong>Ruta:</strong> {{ req.destination }}</p>
+                    <p><strong>Motivo:</strong> {{ req.reason }}</p>
+                    <div class="request-actions">
+                        <a href="{{ url_for('approve_request', request_id=req.id) }}" class="btn btn-success">Aprobar</a>
+                        <a href="{{ url_for('reject_request', request_id=req.id) }}" class="btn btn-danger">Rechazar</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-requests">No hay solicitudes pendientes.</p>
+        {% endif %}
+    </div>
+
+    <div class="card trips-section">
+        <h2>Viajes en Curso</h2>
+        {% if active_trips %}
+            <div class="trips-list">
+                {% for trip in active_trips %}
+                <div class="card trip-card">
+                    <h3>Viaje de {{ trip.user.username }}</h3>
+                    <p><strong>Vehículo:</strong> {{ trip.vehicle.make }} ({{ trip.vehicle.license_plate }})</p>
+                    <p><strong>Ruta:</strong> {{ trip.destination }}</p>
+                    <p><strong>Salida:</strong> {{ trip.start_time.strftime('%d/%m/%Y %H:%M') }}</p>
+                    <p><strong>Odómetro Inicial:</strong> {{ trip.start_odometer }} km</p>
+                    <div class="trip-actions">
+                        <a href="{{ url_for('complete_trip', trip_id=trip.id) }}" class="btn btn-secondary">Marcar como finalizado</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-trips">No hay viajes en curso.</p>
+        {% endif %}
+    </div>
+
+    <div class="card vehicles-section">
+        <h2>Gestión de Vehículos</h2>
+        <div class="vehicles-grid">
+            {% for vehicle in all_vehicles %}
+            <div class="card vehicle-card-admin status-{{ vehicle.status }}">
+                <h3>{{ vehicle.make }} {{ vehicle.model }}</h3>
+                <p><strong>Placa:</strong> {{ vehicle.license_plate }}</p>
+                <p><strong>Odómetro:</strong> {{ vehicle.current_odometer }} km</p>
+                <p><strong>Estado:</strong> <span class="status-badge status-{{ vehicle.status }}">{{ vehicle.status.capitalize() }}</span></p>
+                <div class="vehicle-actions">
+                    <a href="{{ url_for('vehicle_details', vehicle_id=vehicle.id) }}" class="btn btn-primary">Ver Detalles</a>
+                    {% if vehicle.status != 'maintenance' %}
+                    <form action="{{ url_for('set_maintenance', vehicle_id=vehicle.id) }}" method="post" class="inline-form">
+                        <button type="submit" class="btn btn-warning">Mantenimiento</button>
+                    </form>
+                    {% else %}
+                    <form action="{{ url_for('release_maintenance', vehicle_id=vehicle.id) }}" method="post" class="inline-form">
+                        <button type="submit" class="btn btn-success">Liberar</button>
+                    </form>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="card incident-section">
+        <h2>Reportes de Incidentes Pendientes</h2>
+        {% if pending_incidents %}
+            <div class="incidents-list">
+                {% for incident in pending_incidents %}
+                <div class="card incident-card">
+                    <h3>Reporte de Incidente - {{ incident.incident_type }}</h3>
+                    <p><strong>Vehículo:</strong> {{ incident.vehicle.make }} ({{ incident.vehicle.license_plate }})</p>
+                    <p><strong>Reportado por:</strong> {{ incident.user.username }}</p>
+                    <p><strong>Fecha:</strong> {{ incident.report_date.strftime('%d/%m/%Y %H:%M') }}</p>
+                    <div class="incident-actions">
+                        <a href="{{ url_for('view_incident', incident_id=incident.id) }}" class="btn btn-primary">Ver Detalles</a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="no-incidents">No hay reportes de incidentes pendientes.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+
+    {% if current_user.role == 'worker' %}
+    <div class="card worker-section">
+        <h2>Solicitar Vehículo</h2>
+        <div class="forms-container">
+            <div class="card form-box">
+                <form action="{{ url_for('request_vehicle') }}" method="post">
+                    <select name="vehicle_id" required>
+                        <option value="">Selecciona un vehículo</option>
+                        {% for vehicle in vehicles %}
+                        <option value="{{ vehicle.id }}">{{ vehicle.make }} {{ vehicle.model }} ({{ vehicle.license_plate }}) - {{ vehicle.current_odometer }} km</option>
+                        {% endfor %}
+                    </select>
+                    <input type="text" name="destination" placeholder="Destino" required>
+                    <input type="text" name="responsible_name" placeholder="Responsable del vehículo" required>
+                    <input type="number" name="num_auditors" placeholder="No. de auditores" min="1" max="5" required>
+                    <input type="text" name="auditors_names" placeholder="Nombres de los auditores (separados por comas)" required>
+                    <input type="text" name="reason" placeholder="Motivo del viaje" required>
+                    <button type="submit">Solicitar Vehículo</button>
+                    <p class="legend">EXTRICTAMENTE PROHIBIDO QUE EN VEHICULO OFICIAL VIAJEN MÁS DE 5 OCUPANTES</p>
+                </form>
+            </div>
+        </div>
+
+        <h2>Mis Solicitudes</h2>
+        {% if my_requests %}
+        <div class="requests-list">
+            {% for req in my_requests %}
+            <div class="card request-card status-{{ req.status }}">
+                <h3>Solicitud #{{ req.id }}</h3>
+                <p><strong>Vehículo:</strong> {{ req.vehicle.make }} {{ req.vehicle.model }} ({{ req.vehicle.license_plate }})</p>
+                <p><strong>Ruta:</strong> {{ req.destination }}</p>
+                <p><strong>Motivo:</strong> {{ req.reason }}</p>
+                <p><strong>Estado:</strong>
+                    <span class="status-badge status-{{ req.status }}">
+                        {% if req.status == 'pending' %}Pendiente{% endif %}
+                        {% if req.status == 'approved' %}Aprobado{% endif %}
+                        {% if req.status == 'rejected' %}Rechazado{% endif %}
+                    </span>
+                </p>
+                <p><strong>Fecha:</strong> {{ req.date_requested.strftime('%d/%m/%Y %H:%M') }}</p>
+                <div class="report-incident-action">
+                    <a href="{{ url_for('report_incident', vehicle_id=req.vehicle.id) }}" class="btn btn-warning btn-sm">Reportar Incidente</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="no-requests">No has realizado solicitudes.</p>
+        {% endif %}
+    </div>
+    {% endif %}
+{% endblock %}
